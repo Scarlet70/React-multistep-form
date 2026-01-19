@@ -6,7 +6,12 @@ const StepTwo = () => {
 
     return (
         <article className="formStep">
-            <label htmlFor="email">Email</label>
+            <label
+                className="offScreen"
+                htmlFor="email"
+            >
+                Email
+            </label>
             <input
                 type="email"
                 id="email"
@@ -15,7 +20,12 @@ const StepTwo = () => {
                 value={data.email}
                 onChange={(e) => setData({ ...data, email: e.target.value })}
             />
-            <label htmlFor="address">Address</label>
+            <label
+                className="offScreen"
+                htmlFor="address"
+            >
+                Address
+            </label>
             <input
                 type="text"
                 id="address"
@@ -24,7 +34,12 @@ const StepTwo = () => {
                 value={data.address}
                 onChange={(e) => setData({ ...data, address: e.target.value })}
             />
-            <label htmlFor="phone">Phone</label>
+            <label
+                className="offScreen"
+                htmlFor="phone"
+            >
+                Phone
+            </label>
             <input
                 type="phone"
                 id="phone"

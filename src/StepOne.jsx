@@ -12,7 +12,12 @@ const StepOne = () => {
 
     return (
         <article className="formStep">
-            <label htmlFor="firstName">Firstname</label>
+            <label
+                className="offScreen"
+                htmlFor="firstName"
+            >
+                Firstname
+            </label>
             <div className="inputBox">
                 <input
                     type="text"
@@ -27,7 +32,12 @@ const StepOne = () => {
                 <p className="errorMsg">{nameErr}</p>
                 <FaCircleCheck />
             </div>
-            <label htmlFor="lastName">Lastname</label>
+            <label
+                className="offScreen"
+                htmlFor="lastName"
+            >
+                Lastname
+            </label>
             <div className="inputBox">
                 <input
                     type="text"
@@ -42,7 +52,12 @@ const StepOne = () => {
                 <p className="errorMsg">{nameErr}</p>
                 <FaCircleCheck />
             </div>
-            <label htmlFor="password">Password</label>
+            <label
+                className="offScreen"
+                htmlFor="password"
+            >
+                Password
+            </label>
             <div className="passwordBox inputBox">
                 <input
                     type={isVisible ? "text" : "password"}

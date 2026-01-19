@@ -6,7 +6,12 @@ const StepThree = () => {
 
     return (
         <article className="formStep">
-            <label htmlFor="link">Link</label>
+            <label
+                className="offScreen"
+                htmlFor="link"
+            >
+                Link
+            </label>
             <input
                 type="url"
                 id="link"
