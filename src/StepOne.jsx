@@ -1,9 +1,9 @@
 import { FaEye, FaEyeSlash, FaCircleCheck } from "react-icons/fa6";
 import { useContext, useState } from "react";
-import DataContext from "./DataContext";
+import DataContext from "./context/DataContext";
 
-const StepOne = () => {
-    const { data, setData, nameErr } = useContext(DataContext);
+const StepOne = ({ pwdRegex }) => {
+    const { data, setData, nameErr, pwdErr } = useContext(DataContext);
     const [isVisible, setIsvisible] = useState(false);
 
     const toggleVisible = () => {
@@ -30,7 +30,14 @@ const StepOne = () => {
                     }
                 />
                 <p className="errorMsg">{nameErr}</p>
-                <FaCircleCheck />
+                <FaCircleCheck
+                    style={{
+                        color:
+                            data.firstname !== "" && data.firstname.length > 4
+                                ? "limegreen"
+                                : "#5a5959",
+                    }}
+                />
             </div>
             <label
                 className="offScreen"
@@ -50,7 +57,14 @@ const StepOne = () => {
                     }
                 />
                 <p className="errorMsg">{nameErr}</p>
-                <FaCircleCheck />
+                <FaCircleCheck
+                    style={{
+                        color:
+                            data.lastname !== "" && data.lastname.length > 4
+                                ? "limegreen"
+                                : "#5a5959",
+                    }}
+                />
             </div>
             <label
                 className="offScreen"
@@ -69,7 +83,17 @@ const StepOne = () => {
                         setData({ ...data, password: e.target.value })
                     }
                 />
-                <FaCircleCheck />
+                <p className="errorMsg">{pwdErr}</p>
+                <FaCircleCheck
+                    style={{
+                        color:
+                            data.password !== "" &&
+                            data.password.length > 8 &&
+                            pwdRegex.test(data.password)
+                                ? "limegreen"
+                                : "#5a5959",
+                    }}
+                />
                 <button
                     type="button"
                     onClick={toggleVisible}

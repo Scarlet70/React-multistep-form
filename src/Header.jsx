@@ -1,7 +1,9 @@
 const Header = () => {
     return (
         <header>
-            <h1>FoodieFest</h1>
+            <h1>
+                Foodie<span>Feast</span>
+            </h1>
         </header>
     );
 };

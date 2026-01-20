@@ -1,9 +1,10 @@
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
-import { useContext } from "react";
-import DataContext from "./DataContext";
+import { useContext, useEffect } from "react";
+import DataContext from "./context/DataContext";
 
 const Content = () => {
     const {
@@ -13,37 +14,114 @@ const Content = () => {
         setData,
         errMessage,
         setErrMessage,
-        nameErr,
         setNameErr,
+        isValidName,
+        setIsValidName,
+        setPwdErr,
+        isValidPwd,
+        setIsValidPwd,
+        setEmailErr,
+        isValidEmail,
+        setIsValidEmail,
+        setPhoneErr,
+        isValidPhone,
+        setIsValidPhone,
     } = useContext(DataContext);
+
+    const pwdRegex = /\d/;
+
+    useEffect(() => {
+        if (
+            step === 0 &&
+            (data.firstname.length < 4 || data.lastname.length < 4)
+        ) {
+            setIsValidName(false);
+        } else {
+            setIsValidName(true);
+        }
+
+        if (
+            step === 0 &&
+            (data.password.length < 8 || !pwdRegex.test(data.password))
+        ) {
+            setIsValidPwd(false);
+        } else {
+            setIsValidPwd(true);
+        }
+
+        if (step === 1 && !data.email.includes("@")) {
+            setIsValidEmail(false);
+        } else {
+            setIsValidEmail(true);
+        }
+
+        if (step === 1 && data.phoneId.length < 11) {
+            setIsValidPhone(false);
+        } else {
+            setIsValidPhone(true);
+        }
+    }, [data]);
+
     const formSections = [
-        <StepOne />,
+        <StepOne pwdRegex={pwdRegex} />,
         <StepTwo />,
         <StepThree />,
         <StepFour />,
     ];
+
+    const titles = {
+        0: "Personal Info",
+        1: "Contact Info",
+        2: "Links & Summary",
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (step === 2 && data.profileLink === "") {
             setErrMessage("Please fill out all fields");
             return;
         }
-        setData({
-            firstname: "",
-            lastname: "",
-            password: "",
-            email: "",
-            address: "",
-            phoneId: "",
-            profileLink: "",
-            message: "",
-        });
         setStep((prev) => prev + 1);
         setErrMessage("");
     };
 
     const increment = (e) => {
         e.preventDefault();
+
+        //name input validation step
+        if (!isValidName) {
+            setNameErr("name must be at least 4 characters long!");
+            return;
+        } else {
+            setNameErr(null);
+        }
+
+        //password input validation step
+        if (!isValidPwd) {
+            setPwdErr("Please enter a valid password");
+            return;
+        } else {
+            setPwdErr(null);
+        }
+
+        //email input validation step
+
+        if (!isValidEmail) {
+            setEmailErr("Please enter a valid email");
+            return;
+        } else {
+            setEmailErr(null);
+        }
+
+        //Phone number validation step
+        if (!isValidPhone) {
+            setPhoneErr("Enter a Valid phone number");
+            return;
+        } else {
+            setPhoneErr(null);
+        }
+
+        //General Input Validation
         if (
             step === 0 &&
             (data.firstname === "" ||
@@ -64,15 +142,29 @@ const Content = () => {
 
         setStep((prev) => prev + 1);
         setErrMessage("");
+        setNameErr(null);
+        setPwdErr(null);
     };
 
     const decrement = (e) => {
         e.preventDefault();
         setStep((prev) => prev - 1);
         setErrMessage("");
+        setIsValidEmail(true);
+        setEmailErr(null);
     };
 
     const handleSignIn = () => {
+        setData({
+            firstname: "",
+            lastname: "",
+            password: "",
+            email: "",
+            address: "",
+            phoneId: "",
+            profileLink: "",
+            message: "",
+        });
         setStep(0);
     };
 
@@ -126,6 +218,9 @@ const Content = () => {
                 ></div>
             </div>
             <section className="signUp">
+                <h3 style={{ marginBottom: "1rem", color: "gold" }}>
+                    {titles[step]}
+                </h3>
                 <form>
                     {formSections[step]}
                     <p style={{ marginBottom: "2rem", color: "red" }}>
@@ -141,7 +236,7 @@ const Content = () => {
                                 : false
                         }
                     >
-                        Prev
+                        <FaAngleLeft />
                     </button>
                     {step === formSections.length - 2 ? (
                         <button
@@ -160,7 +255,7 @@ const Content = () => {
                                 step >= formSections.length - 1 ? true : false
                             }
                         >
-                            Next
+                            <FaAngleRight />
                         </button>
                     )}
                     {step === formSections.length - 1 && (

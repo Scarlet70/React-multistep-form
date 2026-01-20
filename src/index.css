@@ -41,6 +41,11 @@ body {
 
 header {
     margin-bottom: 1rem;
+    color: pink;
+}
+
+header span {
+    color: gold;
 }
 
 header,
@@ -120,7 +125,6 @@ h2 {
 .formStep {
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
 }
 
 label {
@@ -130,13 +134,17 @@ label {
 input {
     padding: 0.5rem;
     font-size: 1.2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 0.5rem;
     background: transparent;
     border: 0;
     outline: 0;
     border-bottom: 2px solid gray;
 
     transition: box-shadow 0.1s ease-in;
+}
+
+input[type="checkbox"] {
+    margin-bottom: 0;
 }
 
 input:is(:hover) {
@@ -155,14 +163,24 @@ input:focus {
 .passwordBox,
 .inputBox {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#phoneInput {
+    width: calc(80% - 0.2rem);
 }
 
 .inputBox svg {
     position: absolute;
     right: 10px;
-    top: 22%;
-    color: rgb(90, 89, 89);
+    top: 20%;
+    color: #5a5959;
+    font-size: 1rem;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    appearance: none;
 }
 
 .passwordBox button {
@@ -170,7 +188,36 @@ input:focus {
     border: 0;
     position: absolute;
     right: 30px;
-    top: 25%;
+    top: 15%;
+}
+
+.phoneBox {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.phoneBox select {
+    font-family: inherit;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid gray;
+    color: inherit;
+    padding: 1rem;
+    width: calc(20% - 0.2rem);
+}
+
+.phoneBox select:hover {
+    box-shadow: 1px 1px 10px 3px rgba(173, 49, 70, 0.842);
+}
+
+.phoneBox select:focus {
+    outline: 2px solid #ad3145;
+}
+
+.phoneBox select option {
+    background: rgb(29, 28, 28);
+    color: whitesmoke;
 }
 
 textarea {
@@ -180,25 +227,51 @@ textarea {
 }
 
 .scrollLeftBtn,
-.scrollRightBtn,
-.submitBtn,
-.endRegister {
+.scrollRightBtn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    padding: 0;
+    background: transparent;
+    outline: 1px solid #ad3145;
+    border: 0;
+    color: #ad3145;
+}
+
+button {
     font-size: 1.4rem;
     font-family: inherit;
-    padding: 0.4rem 0.8rem;
+    padding: 0.4rem;
+    border-radius: 0.4rem;
     margin-inline-start: 3rem;
 }
 
-.scrollRightBtn:not(:disabled):hover {
-    background: orange;
+button:disabled {
+    color: rgb(78, 78, 78);
+    outline: 1px solid rgb(78, 78, 78);
 }
 
+.scrollRightBtn:not(:disabled):hover,
 .scrollLeftBtn:not(:disabled):hover {
-    background: rgb(25, 143, 131);
+    background: #ad3145;
+    color: whitesmoke;
+    box-shadow: 1px 1px 3px 3px rgba(173, 49, 70, 0.842);
+    outline: 0;
+}
+
+.submitBtn {
+    background: transparent;
+    color: teal;
+    border: 0;
+    outline: 1px solid teal;
 }
 
 .submitBtn:hover {
-    background: #ad3145;
+    background: teal;
+    color: whitesmoke;
+    outline: 0;
+    box-shadow: 1px 1px 3px 3px teal;
 }
 
 .greetMsg p {
@@ -215,6 +288,20 @@ textarea {
 .errorMsg {
     color: red;
     font-size: 0.8rem;
+}
+
+.endRegister {
+    background: transparent;
+    color: #ad3145;
+    border: 0;
+    outline: 1px solid #ad3145;
+}
+
+.endRegister:hover {
+    background: teal;
+    color: whitesmoke;
+    outline: 0;
+    box-shadow: 1px 1px 3px 3px teal;
 }
 
 @media (prefers-color-scheme: light) {

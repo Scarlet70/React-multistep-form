@@ -18,6 +18,13 @@ export const DataProvider = ({ children }) => {
     const [step, setStep] = useState(0);
     const [errMessage, setErrMessage] = useState(null);
     const [nameErr, setNameErr] = useState(null);
+    const [isValidName, setIsValidName] = useState(false);
+    const [pwdErr, setPwdErr] = useState(null);
+    const [isValidPwd, setIsValidPwd] = useState(false);
+    const [emailErr, setEmailErr] = useState(null);
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [phoneErr, setPhoneErr] = useState(null);
+    const [isValidPhone, setIsValidPhone] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(data));
@@ -34,6 +41,20 @@ export const DataProvider = ({ children }) => {
                 setErrMessage,
                 nameErr,
                 setNameErr,
+                isValidName,
+                setIsValidName,
+                pwdErr,
+                setPwdErr,
+                isValidPwd,
+                setIsValidPwd,
+                emailErr,
+                setEmailErr,
+                isValidEmail,
+                setIsValidEmail,
+                phoneErr,
+                setPhoneErr,
+                isValidPhone,
+                setIsValidPhone,
             }}
         >
             {children}
