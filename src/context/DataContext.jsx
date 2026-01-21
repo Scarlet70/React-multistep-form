@@ -25,6 +25,9 @@ export const DataProvider = ({ children }) => {
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [phoneErr, setPhoneErr] = useState(null);
     const [isValidPhone, setIsValidPhone] = useState(false);
+    const [isDarkTheme, setIsDarkTheme] = useState(
+        JSON.parse(localStorage.getItem("App Theme")) || false,
+    );
 
     useEffect(() => {
         localStorage.setItem("user", JSON.stringify(data));
@@ -55,6 +58,8 @@ export const DataProvider = ({ children }) => {
                 setPhoneErr,
                 isValidPhone,
                 setIsValidPhone,
+                isDarkTheme,
+                setIsDarkTheme,
             }}
         >
             {children}

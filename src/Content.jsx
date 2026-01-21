@@ -1,4 +1,5 @@
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
+import Switch from "react-switch";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
@@ -26,6 +27,8 @@ const Content = () => {
         setPhoneErr,
         isValidPhone,
         setIsValidPhone,
+        isDarkTheme,
+        setIsDarkTheme,
     } = useContext(DataContext);
 
     const pwdRegex = /\d/;
@@ -168,6 +171,11 @@ const Content = () => {
         setStep(0);
     };
 
+    const handleToggle = () => {
+        setIsDarkTheme((prev) => !prev);
+        localStorage.setItem("App Theme", JSON.stringify(!isDarkTheme));
+    };
+
     const progress = ((step + 1) / formSections.length) * 100;
 
     return (
@@ -175,6 +183,7 @@ const Content = () => {
             <h2>Client Registration Form</h2>
             <div className="progressBarContainer">
                 <span
+                    style={{ color: "white" }}
                     className={`
                         ${step === 0 || step > 0 ? "active" : null} 
                        ${step === formSections.length - 1 ? "endStyle" : null}
@@ -183,6 +192,7 @@ const Content = () => {
                     1
                 </span>
                 <span
+                    style={{ color: "white" }}
                     className={`
                         ${step > 0 ? "active" : null} 
                        ${step === formSections.length - 1 ? "endStyle" : null}
@@ -191,6 +201,7 @@ const Content = () => {
                     2
                 </span>
                 <span
+                    style={{ color: "white" }}
                     className={`
                         ${step > 1 ? "active" : null} 
                        ${step === formSections.length - 1 ? "endStyle" : null}
@@ -199,6 +210,7 @@ const Content = () => {
                     3
                 </span>
                 <span
+                    style={{ color: "white" }}
                     className={`
                         ${step > 2 ? "active" : null} 
                        ${step === formSections.length - 1 ? "endStyle" : null}
@@ -218,9 +230,25 @@ const Content = () => {
                 ></div>
             </div>
             <section className="signUp">
-                <h3 style={{ marginBottom: "1rem", color: "gold" }}>
-                    {titles[step]}
-                </h3>
+                <div className="formTitle">
+                    <h3 style={{ marginBottom: "1rem", color: "gold" }}>
+                        {titles[step]}
+                    </h3>
+                    <button
+                        className="switch"
+                        style={{ color: isDarkTheme ? "whitesmoke" : "#333" }}
+                    >
+                        <span>{isDarkTheme ? " Light" : " Dark"}</span>
+                        <Switch
+                            onChange={handleToggle}
+                            onColor="#ad3145"
+                            checked={isDarkTheme}
+                            width={30}
+                            height={15}
+                            handleDiameter={15}
+                        />
+                    </button>
+                </div>
                 <form>
                     {formSections[step]}
                     <p style={{ marginBottom: "2rem", color: "red" }}>
